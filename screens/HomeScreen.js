@@ -8,6 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
+import { LinearGradient } from 'expo';
+
 import styles from '../assets/styles/mainStyle';
 
 export default class HomeScreen extends React.Component {
@@ -17,38 +19,41 @@ export default class HomeScreen extends React.Component {
 
   aspX = styles.Constants.aspX;
   aspY = styles.Constants.aspY;
-  
-  render() {
-    
-    
-    return (  
-        <View style={{backgroundColor: styles.color.verdeMusgo, flex:1}}>
 
-          <View style={styles.container.toolbar}>            
-            <View style={{justifyContent: 'flex-start', alignItems: 'flex-start'}}>
+  render() {
+
+
+    return (
+        <LinearGradient 
+          style={{ flex: 1 }}
+          colors={[styles.color.verdeMusgo, styles.color.verdeFolha, styles.color.verdeFolha]}>
+
+
+          <View style={styles.container.toolbar}>
+            <View style={{ justifyContent: 'flex-start', alignItems: 'flex-start' }}>
               <TouchableOpacity
-                onPress={() => {this.props.navigation.openDrawer();}} 
-                >
+                onPress={() => { this.props.navigation.openDrawer(); }}
+              >
                 <Image source={require('../assets/images/menu.png')}
                   style={styles.image.iconToolbar}
-                  />
+                />
               </TouchableOpacity>
             </View>
           </View>
 
-          <ScrollView  contentContainerStyle={styles.container.contentContainer}>
+          <ScrollView contentContainerStyle={styles.container.contentContainer}>
             <View style={styles.container.centerContainer}>
               <Image
                 source={
                   require('../assets/images/logo.png')
                 }
                 style={styles.image.logo}
-                />
+              />
             </View>
 
-            <View style={[styles.container.centerContainer, {height: 90 * this.aspY}]}>
-              <Text style={[styles.text.warningLight, {paddingTop:0}]}>
-              Este é o aplicativo de ajuda do GreaTest Game. Com ele voce pode conferir as regras do Jogo, contar os pontos de cada jogador e, ainda, pode utilizar um dado virtual! Divirta-se!
+            <View style={[styles.container.centerContainer, { height: 90 * this.aspY }]}>
+              <Text style={[styles.text.warningLight, { paddingTop: 0 }]}>
+                Este é o aplicativo de ajuda do GreaTest Game. Com ele voce pode conferir as regras do Jogo, contar os pontos de cada jogador e, ainda, pode utilizar um dado virtual! Divirta-se!
               </Text>
             </View>
 
@@ -58,8 +63,8 @@ export default class HomeScreen extends React.Component {
               </TouchableOpacity>
             </View>
           </ScrollView>
-          
-        </View>
+
+        </LinearGradient> 
     );
   }
 

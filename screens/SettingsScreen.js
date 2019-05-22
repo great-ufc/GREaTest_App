@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ToastAndroid, View, Text, ScrollView, Image,TouchableHighlight, TextInput, Dimensions,TouchableOpacity} from 'react-native';
+import {KeyboardAvoidingView, ToastAndroid, View, Text, ScrollView, Image,TouchableHighlight, TextInput, Dimensions,TouchableOpacity} from 'react-native';
 import styles from '../assets/styles/mainStyle';
 
 export default class SettingsScreen extends React.Component {
@@ -58,7 +58,7 @@ export default class SettingsScreen extends React.Component {
           <Text style={styles.text.subtitle}>
             Você pode cadastrar de 2 até 7 jogadores
           </Text>
-
+          
           <ScrollView style={{
             width: Dimensions.get('screen').width, 
             height: Dimensions.get('screen').height * 0.45, 

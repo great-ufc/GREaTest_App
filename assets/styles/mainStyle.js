@@ -236,10 +236,6 @@ const styleText = StyleSheet.create({
         backgroundColor: colors.verdeMusgo, 
         marginTop: StatusBar.currentHeight, 
         padding: 10, 
-        borderBottomColor: colors.cinzaClaro, 
-        shadowOffset:{width: 10, height: 10}, 
-        shadowColor: colors.cinzaClaro, 
-        borderBottomWidth:1,  
         flexDirection: 'row'
     },
     iconContainer:{
