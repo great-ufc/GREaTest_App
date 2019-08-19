@@ -14,6 +14,8 @@ import DialogWinner from "../components/DialogWinner";
 import DialogEncerrar from "../components/DialogEncerrar";
 import DialogTimer from "../components/DialogTimer";
 import DialogDado from "../components/DialogDado";
+import DialogConfirm from "../components/DialogConfirm";
+import MenuInGame from "../components/Menus/MenuInGame";
 
 export default class InGameScreen extends React.Component {
   static navigationOptions = {
@@ -40,7 +42,9 @@ export default class InGameScreen extends React.Component {
       jogadores: this.props.navigation.getParam("jogadores", []),
       maxPontosIndex: 0,
       dudeMax: {},
-      visibleEncerrar: false
+      visibleEncerrar: false,
+      confirmMaisUm: false,
+      confirmMenosUm: false
     };
   }
 
@@ -59,6 +63,7 @@ export default class InGameScreen extends React.Component {
       jogadores: jogs
     });
   };
+
   menosUm = k => {
     jogs = this.state.jogadores;
 
@@ -104,20 +109,30 @@ export default class InGameScreen extends React.Component {
             </ScrollView>
 
             <TouchableOpacity
-              onPress={() => this.menosUm(jogador.chave)}
-              style={{ alignItems: "center", justifyContent: "center" }}
+              style={styles.button.RoundButtonRed}
+              onPress={() => {
+                this.setState({
+                  confirmMenosUm: true,
+                  jogadorAlvo: jogador.chave
+                });
+              }}
+              // style={{ alignItems: "center", justifyContent: "center" }}
             >
-              <Text style={[styles.button.RoundButtonRed]}> -1 </Text>
+              <Text style={[styles.button.TextWhiteButton]}> -1 </Text>
             </TouchableOpacity>
 
             <Text style={styles.text.destaque}>{jogador.pontos}</Text>
 
             <TouchableOpacity
+              style={[styles.button.RoundButtonGreen]}
               onPress={() => {
-                this.maisUm(jogador.chave);
+                this.setState({
+                  confirmMaisUm: true,
+                  jogadorAlvo: jogador.chave
+                });
               }}
             >
-              <Text style={[styles.button.RoundButtonDark]}>+1</Text>
+              <Text style={[styles.button.TextWhiteButton]}>+1</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -127,82 +142,17 @@ export default class InGameScreen extends React.Component {
     return (
       <View>
         {/** toolbar */}
-        <View style={{ flexDirection: "row", alignItems: "baseline" }}>
-          {/** btn MENU */}
-          <View
-            style={{
-              justifyContent: "flex-start",
-              backgroundColor: styles.color.verdeMusgo,
-              marginTop: 19 * this.aspY,
-              padding: 10 * this.aspX,
-              paddingTop: 14 * this.aspY,
-              flexDirection: "row",
-              flex: 1,
-              resizeMode: "stratch"
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.openDrawer();
-              }}
-            >
-              <Image
-                source={require("../assets/images/menu.png")}
-                style={styles.image.iconToolbar}
-              />
-            </TouchableOpacity>
-          </View>
-          {/** btn TIMER */}
-          <View
-            style={{
-              justifyContent: "flex-end",
-              backgroundColor: styles.color.verdeMusgo,
-              marginTop: 19 * this.aspY,
-              padding: 10 * this.aspX,
-              paddingTop: 14 * this.aspY,
-              marginRight: 0,
-              paddingRight: 5 * this.aspX,
-              resizeMode: "contain",
-              flexDirection: "row"
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({ timerVisible: true });
-              }}
-            >
-              <Image
-                source={require("../assets/images/timerwhite.png")}
-                style={styles.image.iconToolbar}
-              />
-            </TouchableOpacity>
-          </View>
-          {/** btn DADO */}
-          <View
-            style={{
-              justifyContent: "flex-end",
-              backgroundColor: styles.color.verdeMusgo,
-              marginTop: 19 * this.aspY,
-              padding: 10 * this.aspX,
-              paddingTop: 14 * this.aspY,
-              marginLeft: 0,
-              paddingLeft: 5 * this.aspX,
-
-              flexDirection: "row"
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({ visibleDice: true });
-              }}
-            >
-              <Image
-                source={require("../assets/images/dicew2.png")}
-                style={styles.image.iconToolbar}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <MenuInGame
+          onPressDice={() => {
+            this.setState({ visibleDice: true });
+          }}
+          onPressTimer={() => {
+            this.setState({ timerVisible: true });
+          }}
+          onPressMenu={() => {
+            this.props.navigation.openDrawer();
+          }}
+        />
         <View>
           {/** BODY */}
           <View style={styles.container.contentContainerLeft}>
@@ -252,6 +202,34 @@ export default class InGameScreen extends React.Component {
           onOkAction={() => {
             this.setState({ visibleEncerrar: false });
             this.props.navigation.popToTop();
+          }}
+        />
+
+        {/* confirmaçao mais um ponto */}
+        <DialogConfirm
+          content={"Aumentar um Ponto?"}
+          styles={styles}
+          visible={this.state.confirmMaisUm}
+          onCancelAction={() => {
+            this.setState({ confirmMaisUm: false });
+          }}
+          onOkAction={() => {
+            this.maisUm(this.state.jogadorAlvo);
+            this.setState({ confirmMaisUm: false });
+          }}
+        />
+
+        {/* confirmaçao menos um ponto  */}
+        <DialogConfirm
+          content={"Diminuir um Ponto?"}
+          styles={styles}
+          visible={this.state.confirmMenosUm}
+          onCancelAction={() => {
+            this.setState({ confirmMenosUm: false });
+          }}
+          onOkAction={() => {
+            this.menosUm(this.state.jogadorAlvo);
+            this.setState({ confirmMenosUm: false });
           }}
         />
 

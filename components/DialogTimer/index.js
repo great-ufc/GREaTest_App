@@ -118,9 +118,11 @@ export default class DialogTimer extends Component {
               text="Fechar"
               onPress={() => {
                 onCancelAction();
-                this.pauseAlarm();
+                if (this.state.timer === 0) {
+                  this.pauseAlarm();
+                }
                 clearInterval(this.interval);
-                this.setState({ timer: 20 });
+                this.setState({ timer: 20, textoBotaoTimer: "Iniciar" });
               }}
             />
 

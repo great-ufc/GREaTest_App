@@ -8,9 +8,11 @@ import Dialog, {
   DialogButton
 } from "react-native-popup-dialog";
 
-import { View, Animated } from "react-native";
+import Anime from "react-native-anime";
 
-// import { Container } from './styles';
+// import DiceImage from "./DiceImage";
+
+import { View, Image, Easing } from "react-native";
 
 export default class DialogDado extends Component {
   constructor(props) {
@@ -24,22 +26,12 @@ export default class DialogDado extends Component {
         require("../../assets/images/dado3.png"),
         require("../../assets/images/dado4.png"),
         require("../../assets/images/dado5.png"),
-        require("../../assets/images/dado6.png"),
-        require("../../assets/images/threedots.png")
-      ],
-      fadeAnim: new Animated.Value(0),
-      dice: require("../../assets/images/threedots.png"),
-      widthAnimatedd: new Animated.Value(120)
+        require("../../assets/images/dado6.png")
+      ]
     };
   }
 
   // === animatinng ===
-
-  animeImageLoad = () => {
-    Animated.timing(this.state.fadeAnim, {
-      toValue: 1
-    }).start();
-  };
 
   playDice = () => {
     var max = 6;
@@ -47,10 +39,15 @@ export default class DialogDado extends Component {
     let indexImg = Math.floor(Math.random() * (max - min)) + min;
 
     this.setState({
-      uridavez: indexImg,
-
-      dice: this.state.uriImage[indexImg]
+      uridavez: indexImg
     });
+    this.img
+
+      .scale(1.1, { duration: 70, easing: Easing.bounce })
+      .wait(10)
+      .scale(1.0, { duration: 10 })
+      // .moveY(10, { duration: 50 })
+      .start();
   };
 
   render() {
@@ -85,18 +82,18 @@ export default class DialogDado extends Component {
                 }
               ]}
             >
-              <Animated.Image
-                // source={this.state.uriImage[this.state.uridavez]}
-                source={this.state.dice}
-                style={{
-                  opacity: this.state.fadeAnim, // Binds directly
-                  width: 130,
-                  height: 100,
-                  resizeMode: "contain"
-                }}
-                onLoad={this.animeImageLoad}
-                blurRadius={1}
-              />
+              <Anime.View ref={ref => (this.img = ref)} onClick={this.onClick}>
+                <Image
+                  // source={this.state.uriImage[this.state.uridavez]}
+                  source={this.state.uriImage[this.state.uridavez]}
+                  style={{
+                    width: 140,
+                    height: 140,
+                    resizeMode: "contain"
+                  }}
+                  blurRadius={1}
+                />
+              </Anime.View>
               {/* <Image
                 style={{
                   width: 130,
