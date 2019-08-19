@@ -7,7 +7,8 @@ import {
   ScrollView,
   TextInput,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 import styles from "../assets/styles/mainStyle";
 import MenuWhite from "../components/Menus/MenuWhite";
@@ -45,7 +46,7 @@ export default class SettingsScreen extends React.Component {
     let adiciona_jogadores = this.state.jogadores.map(this._mappingJog);
 
     return (
-      <View>
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
         <MenuWhite
           onPress={() => {
             this.props.navigation.openDrawer();
@@ -61,8 +62,10 @@ export default class SettingsScreen extends React.Component {
         <ScrollView
           style={{
             width: Dimensions.get("screen").width,
-            height: Dimensions.get("screen").height * 0.45,
-            flex: 0
+            height: Dimensions.get("screen").height * 0.5,
+            // flex: 1,
+            borderWidth: 1,
+            borderColor: "#f4f4f4"
           }}
           contentContainerStyle={styles.container.contentContainerLeft}
         >
@@ -84,7 +87,7 @@ export default class SettingsScreen extends React.Component {
             <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 

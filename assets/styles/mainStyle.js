@@ -18,8 +18,8 @@ const Constants = {
 
 const styleImages = StyleSheet.create({
   logo: {
-    width: 180 * Constants.aspX,
-    height: 180 * Constants.aspY,
+    width: 200 * Constants.aspX,
+    height: 200 * Constants.aspY,
     resizeMode: "contain",
     marginTop: 20 * Constants.aspY
   },
@@ -105,7 +105,7 @@ const styleButtons = StyleSheet.create({
   },
   touchableText: {
     padding: 10 * Constants.aspX,
-    height: 40 * Constants.aspY,
+    // height: 40 * Constants.aspY,
     textAlign: "center",
     fontSize: 16,
     color: colors.verdeFolha
