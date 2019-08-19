@@ -236,6 +236,7 @@ export default class InGameScreen extends React.Component {
         <DialogDado
           title={"Dado"}
           styles={styles}
+          visible={this.state.visibleDice}
           onCancelAction={() => {
             this.setState({ visibleDice: false });
           }}
@@ -244,6 +245,7 @@ export default class InGameScreen extends React.Component {
         <DialogEncerrar
           title={"Fim de Partida!"}
           styles={styles}
+          visible={this.state.visibleEncerrar}
           onCancelAction={() => {
             this.setState({ visibleEncerrar: false });
           }}
@@ -255,7 +257,7 @@ export default class InGameScreen extends React.Component {
 
         <DialogWinner
           styles={styles}
-          visible={visibleWinner}
+          visible={this.state.visibleWinner}
           title={"Fim de Partida!"}
           onCancelAction={() => {
             this.setState({ visibleWinner: false });
@@ -271,8 +273,6 @@ export default class InGameScreen extends React.Component {
           styles={styles}
           visible={this.state.timerVisible}
           onCancelAction={() => {
-            clearInterval(this.interval);
-            this.pauseAlarm();
             this.setState({ timerVisible: false });
           }}
         />

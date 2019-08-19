@@ -117,7 +117,9 @@ export default class DialogTimer extends Component {
             <DialogButton
               text="Fechar"
               onPress={() => {
-                onCancelAction;
+                onCancelAction();
+                this.pauseAlarm();
+                clearInterval(this.interval);
                 this.setState({ timer: 20 });
               }}
             />
