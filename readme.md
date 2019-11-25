@@ -1,3 +1,5 @@
 # GREaTest Card Helper
 
-### um aplicativo para o apoio à condução do jogo GREaTest Card Game (ver o site oficial)
+### An app to assist and support GreaTest Card Game gameplay
+
+### oficial site: pesquisa.great.ufc.br/greatest
