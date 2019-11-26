@@ -8,10 +8,12 @@ import {
   TextInput,
   Dimensions,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  BackHandler
 } from "react-native";
 import styles from "../assets/styles/mainStyle";
 import MenuWhite from "../components/Menus/MenuWhite";
+import DialogEncerrar from "../components/DialogEncerrar";
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -25,6 +27,7 @@ export default class SettingsScreen extends React.Component {
     super(props);
     this._addRow = this._addRow.bind(this);
     this.state = {
+      visibleEncerrar: false,
       jogadores: [
         {
           chave: 1,
@@ -41,6 +44,28 @@ export default class SettingsScreen extends React.Component {
       ]
     };
   }
+
+  componentDidMount() {
+    // for preventing from leaving abruptaly
+    this.setState({
+      backHandler: BackHandler.addEventListener(
+        "hardwareBackPress",
+        this.handleBackPress
+      )
+    });
+  }
+
+  componentWillUnmount() {
+    this.state.backHandler.remove();
+  }
+
+  /**
+   * Called when back button is presses on android
+   */
+  handleBackPress = () => {
+    this.setState({ visibleEncerrar: true });
+    return true;
+  };
 
   render() {
     let adiciona_jogadores = this.state.jogadores.map(this._mappingJog);
@@ -87,6 +112,19 @@ export default class SettingsScreen extends React.Component {
             <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
           </TouchableOpacity>
         </View>
+
+        <DialogEncerrar
+          title={""}
+          styles={styles}
+          visible={this.state.visibleEncerrar}
+          onCancelAction={() => {
+            this.setState({ visibleEncerrar: false });
+          }}
+          onOkAction={() => {
+            this.setState({ visibleEncerrar: false });
+            this.props.navigation.goBack();
+          }}
+        />
       </KeyboardAvoidingView>
     );
   }

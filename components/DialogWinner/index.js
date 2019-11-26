@@ -10,6 +10,8 @@ import Dialog, {
   DialogButton
 } from "react-native-popup-dialog";
 
+import { Audio } from "expo-av";
+
 import Anime from "react-native-anime";
 
 export default class DialogWinner extends Component {
@@ -48,7 +50,7 @@ export default class DialogWinner extends Component {
   };
 
   makeAlarm = async () => {
-    const soundObject = new Expo.Audio.Sound();
+    const soundObject = new Audio.Sound();
     try {
       await soundObject.loadAsync(require("../../assets/sounds/claps.mp3"));
       this.setState({ alarm: soundObject });

@@ -8,7 +8,7 @@ import {
   StatusBar
 } from "react-native";
 
-import { LinearGradient } from "expo";
+import { LinearGradient } from "expo-linear-gradient";
 
 import styles from "../assets/styles/mainStyle";
 import MenuWhite from "../components/Menus/MenuWhite";

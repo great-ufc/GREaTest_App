@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, ScrollView, Text, View, TouchableOpacity } from "react-native";
+import {
+  Image,
+  ScrollView,
+  Text,
+  View,
+  TouchableOpacity,
+  BackHandler
+} from "react-native";
 
 import Dialog, {
   SlideAnimation,
@@ -47,6 +54,28 @@ export default class InGameScreen extends React.Component {
       confirmMenosUm: false
     };
   }
+
+  componentDidMount() {
+    // prevent from leaving abruptaly
+    this.setState({
+      backHandler: BackHandler.addEventListener(
+        "hardwareBackPress",
+        this.handleBackPress
+      )
+    });
+  }
+
+  componentWillUnmount() {
+    this.state.backHandler.remove();
+  }
+
+  /**
+   * Called when back button is presses on android
+   */
+  handleBackPress = () => {
+    this.setState({ visibleEncerrar: true });
+    return true;
+  };
 
   // === mais e menos um ===
 

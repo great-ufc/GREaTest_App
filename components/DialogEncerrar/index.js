@@ -35,10 +35,12 @@ export default class DialogEncerrar extends Component {
           <DialogContent>
             <View
               style={[
-                styles.container.centerContainer,
+                //styles.container.centerContainer,
                 {
                   width: styles.widthScreen * 0.7,
-                  height: styles.heightScreen * 0.15
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: 10
                 }
               ]}
             >
@@ -46,14 +48,15 @@ export default class DialogEncerrar extends Component {
                 style={[
                   styles.text.subtitle,
                   {
+                    fontSize: 25,
                     textAlign: "center",
                     justifyContent: "center",
                     margin: 0,
-                    padding: 10
+                    marginTop: 20
                   }
                 ]}
               >
-                Deseja Encerrar a partida?
+                Sair?
               </Text>
             </View>
           </DialogContent>

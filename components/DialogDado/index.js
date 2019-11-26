@@ -43,8 +43,8 @@ export default class DialogDado extends Component {
     });
     this.img
 
-      .scale(1.1, { duration: 70, easing: Easing.bounce })
-      .wait(10)
+      .scale(1.3, { duration: 70, easing: Easing.bounce })
+      .wait(100)
       .scale(1.0, { duration: 10 })
       // .moveY(10, { duration: 50 })
       .start();
@@ -94,14 +94,6 @@ export default class DialogDado extends Component {
                   blurRadius={1}
                 />
               </Anime.View>
-              {/* <Image
-                style={{
-                  width: 130,
-                  height: 100,
-                  resizeMode: "contain"
-                }}
-                source={this.state.uriImage[this.state.uridavez]}
-              /> */}
             </View>
           </DialogContent>
         </Dialog>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Text, View } from "react-native";
+import { Audio } from "expo-av";
 
 import Dialog, {
   SlideAnimation,
@@ -91,7 +92,8 @@ export default class DialogTimer extends Component {
   };
 
   makeAlarm = async () => {
-    const soundObject = new Expo.Audio.Sound();
+    const soundObject = new Audio.Sound();
+
     try {
       await soundObject.loadAsync(require("../../assets/sounds/alarm.mp3"));
       this.setState({ alarm: soundObject });
@@ -118,9 +120,7 @@ export default class DialogTimer extends Component {
               text="Fechar"
               onPress={() => {
                 onCancelAction();
-                if (this.state.timer === 0) {
-                  this.pauseAlarm();
-                }
+                this.pauseAlarm();
                 clearInterval(this.interval);
                 this.setState({ timer: 20, textoBotaoTimer: "Iniciar" });
               }}
@@ -128,7 +128,10 @@ export default class DialogTimer extends Component {
 
             <DialogButton
               text={this.state.textoBotaoTimer}
-              onPress={this.onStartTimer}
+              onPress={() => {
+                this.onStartTimer();
+                this.pauseAlarm();
+              }}
             />
           </DialogFooter>
         }
