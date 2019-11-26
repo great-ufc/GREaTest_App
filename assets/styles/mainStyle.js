@@ -6,6 +6,7 @@ const colors = {
   branco: "#fdfeff",
   cinza: "rgba(96,100,109, 1)",
   cinzaClaro: "#73707070",
+  cinzaMaisClaro: "#d9d9d9",
   rubro: "#5b1313"
 };
 
@@ -50,6 +51,7 @@ const styleButtons = StyleSheet.create({
     width: 180 * Constants.aspX,
     height: 40 * Constants.aspY,
     margin: 15 * Constants.aspY,
+    marginTop: 25 * Constants.aspY,
     backgroundColor: colors.branco,
     textAlign: "center",
     fontSize: 16,
@@ -104,7 +106,7 @@ const styleButtons = StyleSheet.create({
     color: colors.branco
   },
   touchableText: {
-    padding: 10 * Constants.aspX,
+    padding: 10,
     // height: 40 * Constants.aspY,
     textAlign: "center",
     fontSize: 16,
@@ -187,8 +189,8 @@ const styleContainer = StyleSheet.create({
   centerContainer: {
     alignItems: "center",
     marginTop: 10 * Constants.aspY,
-    marginBottom: 20 * Constants.aspY,
-    padding: 20 * Constants.aspY
+    marginBottom: 15 * Constants.aspY,
+    padding: 5 * Constants.aspY
   },
   leftContainer: {
     alignItems: "flex-start",
@@ -233,7 +235,7 @@ const styleContainer = StyleSheet.create({
   }
 });
 
-export default (mainStyle = {
+export default mainStyle = {
   image: styleImages,
 
   button: styleButtons,
@@ -247,4 +249,4 @@ export default (mainStyle = {
   widthScreen: Dimensions.get("screen").width,
   heightScreen: Dimensions.get("screen").height,
   Constants
-});
+};

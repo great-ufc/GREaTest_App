@@ -14,6 +14,7 @@ import {
 import styles from "../assets/styles/mainStyle";
 import MenuWhite from "../components/Menus/MenuWhite";
 import DialogEncerrar from "../components/DialogEncerrar";
+import DialogConfirm from "../components/DialogConfirm";
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -28,6 +29,7 @@ export default class SettingsScreen extends React.Component {
     this._addRow = this._addRow.bind(this);
     this.state = {
       visibleEncerrar: false,
+      visibleConfirm: false,
       jogadores: [
         {
           chave: 1,
@@ -87,10 +89,9 @@ export default class SettingsScreen extends React.Component {
         <ScrollView
           style={{
             width: Dimensions.get("screen").width,
-            height: Dimensions.get("screen").height * 0.5,
-            // flex: 1,
+            flex: 1,
             borderWidth: 1,
-            borderColor: "#f4f4f4"
+            borderColor: styles.color.cinzaMaisClaro
           }}
           contentContainerStyle={styles.container.contentContainerLeft}
         >
@@ -108,7 +109,9 @@ export default class SettingsScreen extends React.Component {
         </View>
 
         <View style={[styles.container.centerContainer, { margin: 0 }]}>
-          <TouchableOpacity onPress={this._goToGamePage}>
+          <TouchableOpacity
+            onPress={() => this.setState({ visibleConfirm: true })}
+          >
             <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
           </TouchableOpacity>
         </View>
@@ -123,6 +126,19 @@ export default class SettingsScreen extends React.Component {
           onOkAction={() => {
             this.setState({ visibleEncerrar: false });
             this.props.navigation.goBack();
+          }}
+        />
+
+        <DialogConfirm
+          content={"Começar a Partida?"}
+          styles={styles}
+          visible={this.state.visibleConfirm}
+          onCancelAction={() => {
+            this.setState({ visibleConfirm: false });
+          }}
+          onOkAction={() => {
+            this._goToGamePage();
+            this.setState({ visibleConfirm: false });
           }}
         />
       </KeyboardAvoidingView>

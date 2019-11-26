@@ -48,7 +48,7 @@ export default class HomeScreen extends React.Component {
           <View
             style={[
               styles.container.centerContainer,
-              { height: 90 * this.aspY }
+              { padding: 20, marginTop: 15, marginBottom: 15 }
             ]}
           >
             <Text style={[styles.text.warningLight, { paddingTop: 0 }]}>
@@ -58,7 +58,7 @@ export default class HomeScreen extends React.Component {
             </Text>
           </View>
 
-          <View style={styles.container.centerContainer}>
+          <View style={{ alignItems: "center", padding: 15 }}>
             <TouchableOpacity onPress={this._goToConfigPage}>
               <Text style={styles.button.mainButtonLight}>Criar Novo Jogo</Text>
             </TouchableOpacity>
