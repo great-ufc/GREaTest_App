@@ -303,7 +303,7 @@ export default class InGameScreen extends React.Component {
       return "EMPATE!";
     }
 
-    return jogs[winner].content.concat(" foi o vencedor! Parabéns!");
+    return jogs[winner].content.concat(" venceu! Parabéns!");
   };
 
   _makeArrayPoints = () => {

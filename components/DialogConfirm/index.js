@@ -15,7 +15,12 @@ export default class DialogConfirm extends Component {
     const { styles, visible, content, onCancelAction, onOkAction } = this.props;
 
     return (
-      <View style={[styles.container.centerContainer]}>
+      <View
+        style={[
+          styles.container.centerContainer,
+          { justifyContent: "center", alignItems: "center" }
+        ]}
+      >
         {/** pop up do encerrar */}
         <Dialog
           visible={visible}
@@ -38,7 +43,9 @@ export default class DialogConfirm extends Component {
                 styles.container.centerContainer,
                 {
                   width: styles.widthScreen * 0.7,
-                  height: styles.heightScreen * 0.15
+                  height: styles.heightScreen * 0.15,
+                  justifyContent: "center",
+                  alignItems: "center"
                 }
               ]}
             >
@@ -48,6 +55,7 @@ export default class DialogConfirm extends Component {
                   {
                     textAlign: "center",
                     justifyContent: "center",
+                    alignItems: "center",
                     margin: 0,
                     padding: 0
                   }

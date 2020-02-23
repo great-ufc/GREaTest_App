@@ -15,10 +15,16 @@ export default class DialogEncerrar extends Component {
     const { styles, visible, title, onCancelAction, onOkAction } = this.props;
 
     return (
-      <View style={[styles.container.centerContainer]}>
+      <View
+        style={[
+          styles.container.centerContainer,
+          { justifyContent: "center", alignItems: "center" }
+        ]}
+      >
         {/** pop up do encerrar */}
         <Dialog
           visible={visible}
+          style={{ justifyContent: "center", alignItems: "center" }}
           dialogAnimation={
             new SlideAnimation({
               slideFrom: "bottom"
@@ -51,6 +57,7 @@ export default class DialogEncerrar extends Component {
                     fontSize: 25,
                     textAlign: "center",
                     justifyContent: "center",
+                    alignItems: "center",
                     margin: 0,
                     marginTop: 20
                   }

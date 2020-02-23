@@ -70,7 +70,12 @@ export default class DialogWinner extends Component {
     } = this.props;
 
     return (
-      <View style={[styles.container.centerContainer]}>
+      <View
+        style={[
+          styles.container.centerContainer,
+          { justifyContent: "center", alignItems: "center" }
+        ]}
+      >
         {/** pop up do winner */}
         <Dialog
           visible={visible}
@@ -105,7 +110,9 @@ export default class DialogWinner extends Component {
                 styles.container.centerContainer,
                 {
                   width: styles.widthScreen * 0.7,
-                  height: styles.heightScreen * 0.3
+                  height: styles.heightScreen * 0.3,
+                  justifyContent: "center",
+                  alignItems: "center"
                 }
               ]}
             >
@@ -115,7 +122,9 @@ export default class DialogWinner extends Component {
                     width: styles.heightScreen * 0.18,
                     height: styles.heightScreen * 0.18,
                     resizeMode: "contain",
-                    marginBottom: 15
+                    marginBottom: 15,
+                    justifyContent: "center",
+                    alignItems: "center"
                   }}
                   source={require("../../assets/images/trofeu.png")}
                 />
@@ -128,6 +137,7 @@ export default class DialogWinner extends Component {
                     {
                       textAlign: "center",
                       justifyContent: "center",
+                      alignItems: "center",
                       margin: 0,
                       padding: 0
                     }
