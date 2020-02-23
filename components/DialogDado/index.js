@@ -48,7 +48,6 @@ export default class DialogDado extends Component {
 
   componentWillUnmount() {
     this.pauseAlarm();
-    this.state.alarm.unloadAsync();
   }
 
   // === sound stuf ===
@@ -56,7 +55,9 @@ export default class DialogDado extends Component {
   pauseAlarm = async () => {
     const som = this.state.alarm;
     try {
-      await som.stopAsync();
+      if (som) {
+        await som.stopAsync();
+      }
     } catch (error) {
       console.log("(pause sound) ERRO! Nao parou de tocar: ", error);
     }

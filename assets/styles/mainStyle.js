@@ -78,9 +78,9 @@ const styleButtons = StyleSheet.create({
   },
 
   RoundButtonGreen: {
-    borderRadius: 45 * Constants.aspX,
+    borderRadius: 60 * Constants.aspX,
     width: 40 * Constants.aspX,
-    height: 34 * Constants.aspY,
+    height: 40 * Constants.aspX,
     backgroundColor: colors.verdeMusgo,
     margin: 10 * Constants.aspX,
     padding: 10 * Constants.aspX,
@@ -89,9 +89,9 @@ const styleButtons = StyleSheet.create({
   },
 
   RoundButtonRed: {
-    borderRadius: 45 * Constants.aspX,
+    borderRadius: 60 * Constants.aspX,
     width: 40 * Constants.aspX,
-    height: 34 * Constants.aspY,
+    height: 40 * Constants.aspX,
     backgroundColor: colors.rubro,
     margin: 10 * Constants.aspX,
     padding: 10 * Constants.aspX,
@@ -187,10 +187,10 @@ const styleText = StyleSheet.create({
 
 const styleContainer = StyleSheet.create({
   centerContainer: {
-    alignItems: "center",
-    marginTop: 10 * Constants.aspY,
-    marginBottom: 15 * Constants.aspY,
-    padding: 5 * Constants.aspY
+    alignItems: "center"
+    // marginTop: 10 * Constants.aspY,
+    // marginBottom: 15 * Constants.aspY,
+    // padding: 5 * Constants.aspY
   },
   leftContainer: {
     alignItems: "flex-start",
@@ -199,7 +199,9 @@ const styleContainer = StyleSheet.create({
     padding: 30 * Constants.aspY
   },
   contentContainer: {
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1
   },
   contentContainerLeft: {
     alignItems: "flex-start",

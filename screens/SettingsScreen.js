@@ -73,34 +73,38 @@ export default class SettingsScreen extends React.Component {
     let adiciona_jogadores = this.state.jogadores.map(this._mappingJog);
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
-        <MenuWhite
-          onPress={() => {
-            this.props.navigation.openDrawer();
-          }}
-        />
-
-        <Text style={[styles.text.title]}>Quem vai jogar?</Text>
-
-        <Text style={styles.text.subtitle}>
-          Você pode cadastrar de 2 até 7 jogadores
-        </Text>
-
-        <ScrollView
+      <View style={{ flex: 1 }}>
+        <KeyboardAvoidingView
+          behavior="padding"
           style={{
-            width: Dimensions.get("screen").width,
-            flex: 1,
-            borderWidth: 1,
-            borderColor: styles.color.cinzaMaisClaro
+            flex: 1
           }}
-          contentContainerStyle={styles.container.contentContainerLeft}
         >
-          {adiciona_jogadores}
-        </ScrollView>
+          <MenuWhite
+            onPress={() => {
+              this.props.navigation.openDrawer();
+            }}
+          />
 
-        <View
-          style={[styles.container.centerContainer, { padding: 0, margin: 0 }]}
-        >
+          <Text style={[styles.text.title]}>Quem vai jogar?</Text>
+
+          <Text style={styles.text.subtitle}>
+            Você pode cadastrar de 2 até 7 jogadores
+          </Text>
+
+          <ScrollView
+            style={{
+              width: Dimensions.get("screen").width,
+              borderTopWidth: 1,
+              borderTopColor: styles.color.cinzaMaisClaro
+            }}
+            contentContainerStyle={styles.container.contentContainerLeft}
+          >
+            {adiciona_jogadores}
+          </ScrollView>
+        </KeyboardAvoidingView>
+
+        <View style={[styles.container.centerContainer, { margin: 10 }]}>
           <TouchableOpacity onPress={this._addRow}>
             <Text style={styles.button.touchableText}>
               ADICIONAR NOVO JOGADOR
@@ -108,20 +112,12 @@ export default class SettingsScreen extends React.Component {
           </TouchableOpacity>
         </View>
 
-        <View style={[styles.container.centerContainer, { margin: 0 }]}>
-          <TouchableOpacity
-            onPress={() => this.setState({ visibleConfirm: true })}
-          >
-            <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
-          </TouchableOpacity>
-        </View>
-
         <DialogEncerrar
           title={""}
           styles={styles}
           visible={this.state.visibleEncerrar}
-          onCancelAction={() => {
-            this.setState({ visibleEncerrar: false });
+          onCancelAction={async () => {
+            await this.setState({ visibleEncerrar: false });
           }}
           onOkAction={() => {
             this.setState({ visibleEncerrar: false });
@@ -141,7 +137,15 @@ export default class SettingsScreen extends React.Component {
             this.setState({ visibleConfirm: false });
           }}
         />
-      </KeyboardAvoidingView>
+
+        <View style={[styles.container.centerContainer, { margin: 10 }]}>
+          <TouchableOpacity
+            onPress={() => this.setState({ visibleConfirm: true })}
+          >
+            <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 
