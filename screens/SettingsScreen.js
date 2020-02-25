@@ -15,6 +15,7 @@ import styles from "../assets/styles/mainStyle";
 import MenuWhite from "../components/Menus/MenuWhite";
 import DialogEncerrar from "../components/DialogEncerrar";
 import DialogConfirm from "../components/DialogConfirm";
+import strings from "../constants/Strings";
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -26,21 +27,26 @@ export default class SettingsScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    const lg = this.props.navigation.getParam("lg", "pt");
+
     this._addRow = this._addRow.bind(this);
+
     this.state = {
+      lg: lg,
       visibleEncerrar: false,
       visibleConfirm: false,
       jogadores: [
         {
           chave: 1,
-          title: "Jogador 1",
-          content: "Jogador 1",
+          title: strings.settings.playerTitle(lg) + "1",
+          content: strings.settings.playerTitle(lg) + "1",
           pontos: 0
         },
         {
           chave: 2,
-          title: "Jogador 2",
-          content: "Jogador 2",
+          title: strings.settings.playerTitle(lg) + "2",
+          content: strings.settings.playerTitle(lg) + "2",
           pontos: 0
         }
       ]
@@ -72,6 +78,8 @@ export default class SettingsScreen extends React.Component {
   render() {
     let adiciona_jogadores = this.state.jogadores.map(this._mappingJog);
 
+    let { lg } = this.state;
+
     return (
       <View style={{ flex: 1 }}>
         <KeyboardAvoidingView
@@ -86,10 +94,10 @@ export default class SettingsScreen extends React.Component {
             }}
           />
 
-          <Text style={[styles.text.title]}>Quem vai jogar?</Text>
+          <Text style={[styles.text.title]}>{strings.settings.title(lg)}</Text>
 
           <Text style={styles.text.subtitle}>
-            Você pode cadastrar de 2 até 7 jogadores
+            {strings.settings.subtitle(lg)}
           </Text>
 
           <ScrollView
@@ -107,7 +115,7 @@ export default class SettingsScreen extends React.Component {
         <View style={[styles.container.centerContainer, { margin: 10 }]}>
           <TouchableOpacity onPress={this._addRow}>
             <Text style={styles.button.touchableText}>
-              ADICIONAR NOVO JOGADOR
+              {strings.settings.addButton(lg)}
             </Text>
           </TouchableOpacity>
         </View>
@@ -142,7 +150,9 @@ export default class SettingsScreen extends React.Component {
           <TouchableOpacity
             onPress={() => this.setState({ visibleConfirm: true })}
           >
-            <Text style={[styles.button.mainButtonDark]}>INICIAR JOGO</Text>
+            <Text style={[styles.button.mainButtonDark]}>
+              {strings.settings.startButton(lg)}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -180,7 +190,7 @@ export default class SettingsScreen extends React.Component {
     return (
       <View key={jogador.chave} pass_in_jogador={jogador} style={{ flex: 0 }}>
         <Text style={[styles.text.subtitle, { paddingTop: 20 }]}>
-          Jogador {jogador.chave}
+          {strings.settings.playerTitle(this.state.lg)} {jogador.chave}
         </Text>
 
         <View
@@ -193,7 +203,7 @@ export default class SettingsScreen extends React.Component {
         >
           <TextInput
             style={styles.text.input}
-            placeholder="Digite o nome do Jogador..."
+            placeholder={strings.settings.placeholderPlayer(this.state.lg)}
             onChangeText={text => this._onChangeName(text, jogador.chave)}
           />
           <View>
@@ -246,7 +256,8 @@ export default class SettingsScreen extends React.Component {
 
   _goToGamePage = () => {
     this.props.navigation.navigate("InGame", {
-      jogadores: this.state.jogadores
+      jogadores: this.state.jogadores,
+      lg: this.state.lg
     });
   };
 }

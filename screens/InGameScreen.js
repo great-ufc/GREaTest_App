@@ -23,6 +23,7 @@ import DialogTimer from "../components/DialogTimer";
 import DialogDado from "../components/DialogDado";
 import DialogConfirm from "../components/DialogConfirm";
 import MenuInGame from "../components/Menus/MenuInGame";
+import strings from "../constants/Strings";
 
 export default class InGameScreen extends React.Component {
   static navigationOptions = {
@@ -37,9 +38,11 @@ export default class InGameScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    const lg = this.props.navigation.getParam("lg", "pt");
+
     this.state = {
       alarm: null,
-
+      lg: lg,
       nplayers: 0,
       visibleDice: false,
       visibleWinner: false,
@@ -168,6 +171,8 @@ export default class InGameScreen extends React.Component {
       );
     });
 
+    const { lg } = this.state;
+
     return (
       <View>
         {/** toolbar */}
@@ -185,7 +190,9 @@ export default class InGameScreen extends React.Component {
         <View>
           {/** BODY */}
           <View style={styles.container.contentContainerLeft}>
-            <Text style={styles.text.title}>JOGADORES</Text>
+            <Text style={styles.text.title}>
+              {strings.ingame.playersTitle(lg)}
+            </Text>
           </View>
 
           <ScrollView
@@ -205,7 +212,9 @@ export default class InGameScreen extends React.Component {
                 { padding: 10, margin: 0 }
               ]}
             >
-              <Text style={styles.button.mainButtonRed}>ENCERRAR PARTIDA</Text>
+              <Text style={styles.button.mainButtonRed}>
+                {strings.ingame.closeButton(lg)}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -222,7 +231,7 @@ export default class InGameScreen extends React.Component {
         />
 
         <DialogEncerrar
-          title={"Fim de Partida!"}
+          title={strings.popup.endMatch(lg)}
           styles={styles}
           visible={this.state.visibleEncerrar}
           onCancelAction={() => {
@@ -236,7 +245,7 @@ export default class InGameScreen extends React.Component {
 
         {/* confirmaçao mais um ponto */}
         <DialogConfirm
-          content={"Aumentar um Ponto?"}
+          content={strings.popup.increase(lg)}
           styles={styles}
           visible={this.state.confirmMaisUm}
           onCancelAction={() => {
@@ -250,7 +259,7 @@ export default class InGameScreen extends React.Component {
 
         {/* confirmaçao menos um ponto  */}
         <DialogConfirm
-          content={"Diminuir um Ponto?"}
+          content={strings.popup.decrease(lg)}
           styles={styles}
           visible={this.state.confirmMenosUm}
           onCancelAction={() => {
@@ -265,7 +274,7 @@ export default class InGameScreen extends React.Component {
         <DialogWinner
           styles={styles}
           visible={this.state.visibleWinner}
-          title={"Fim de Partida!"}
+          title={strings.popup.endMatch(lg)}
           onCancelAction={() => {
             this.setState({ visibleWinner: false });
           }}

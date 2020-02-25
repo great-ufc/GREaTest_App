@@ -11,6 +11,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 
 import styles from "../assets/styles/mainStyle";
+import strings from "../constants/Strings";
 import MenuWhite from "../components/Menus/MenuWhite";
 
 export default class HomeScreen extends React.Component {
@@ -18,10 +19,26 @@ export default class HomeScreen extends React.Component {
     header: null
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      lg: "pt"
+    };
+  }
+
+  changeLang = () => {
+    this.setState({ lg: this.state.lg === "pt" ? "en" : "pt" });
+  };
+
   aspX = styles.Constants.aspX;
   aspY = styles.Constants.aspY;
 
   render() {
+    const { lg } = this.state;
+    let flagImage =
+      lg === "pt"
+        ? require("../assets/images/usa-flag.png")
+        : require("../assets/images/brazil-flag.png");
     return (
       <LinearGradient
         style={{ flex: 1 }}
@@ -35,6 +52,26 @@ export default class HomeScreen extends React.Component {
           onPress={() => {
             this.props.navigation.openDrawer();
           }}
+          LeftComponent={() => (
+            <TouchableOpacity
+              onPress={() => {
+                this.changeLang();
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Image source={flagImage} style={styles.image.iconToolbar} />
+                <Text style={styles.button.TextWhiteButton}>
+                  {lg === "pt" ? "EN" : "PT-BR"}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
         />
 
         <ScrollView contentContainerStyle={styles.container.contentContainer}>
@@ -52,15 +89,15 @@ export default class HomeScreen extends React.Component {
             ]}
           >
             <Text style={[styles.text.warningLight, { paddingTop: 0 }]}>
-              Este é o aplicativo de ajuda do GreaTest Game. Com ele voce pode
-              conferir as regras do Jogo, contar os pontos de cada jogador e,
-              ainda, pode utilizar um dado virtual! Divirta-se!
+              {strings.home.painel(lg)}
             </Text>
           </View>
 
           <View style={{ alignItems: "center", padding: 15 }}>
             <TouchableOpacity onPress={this._goToConfigPage}>
-              <Text style={styles.button.mainButtonLight}>Criar Novo Jogo</Text>
+              <Text style={styles.button.mainButtonLight}>
+                {strings.home.button(lg)}
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -69,6 +106,8 @@ export default class HomeScreen extends React.Component {
   }
 
   _goToConfigPage = () => {
-    this.props.navigation.navigate("Settings");
+    this.props.navigation.navigate("Settings", {
+      lg: this.state.lg
+    });
   };
 }
