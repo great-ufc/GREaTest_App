@@ -222,7 +222,8 @@ export default class InGameScreen extends React.Component {
         {/* === dialogs === */}
 
         <DialogDado
-          title={"Dado"}
+          lg={lg}
+          title={strings.ingame.dice(lg)}
           styles={styles}
           visible={this.state.visibleDice}
           onCancelAction={() => {
@@ -231,6 +232,7 @@ export default class InGameScreen extends React.Component {
         />
 
         <DialogEncerrar
+          lg={lg}
           title={strings.popup.endMatch(lg)}
           styles={styles}
           visible={this.state.visibleEncerrar}
@@ -245,6 +247,7 @@ export default class InGameScreen extends React.Component {
 
         {/* confirmaçao mais um ponto */}
         <DialogConfirm
+          lg={lg}
           content={strings.popup.increase(lg)}
           styles={styles}
           visible={this.state.confirmMaisUm}
@@ -259,6 +262,7 @@ export default class InGameScreen extends React.Component {
 
         {/* confirmaçao menos um ponto  */}
         <DialogConfirm
+          lg={lg}
           content={strings.popup.decrease(lg)}
           styles={styles}
           visible={this.state.confirmMenosUm}
@@ -272,6 +276,7 @@ export default class InGameScreen extends React.Component {
         />
 
         <DialogWinner
+          lg={lg}
           styles={styles}
           visible={this.state.visibleWinner}
           title={strings.popup.endMatch(lg)}
@@ -286,6 +291,7 @@ export default class InGameScreen extends React.Component {
         />
 
         <DialogTimer
+          lg={lg}
           styles={styles}
           visible={this.state.timerVisible}
           onCancelAction={() => {
@@ -309,10 +315,12 @@ export default class InGameScreen extends React.Component {
       }
     }
     if (nwinners > 1) {
-      return "EMPATE!";
+      return this.state.lg === "pt" ? "EMPATE!" : "DRAW!";
     }
 
-    return jogs[winner].content.concat(" venceu! Parabéns!");
+    return jogs[winner].content.concat(
+      this.state.lg === "pt" ? " venceu! Parabéns!" : " wins!"
+    );
   };
 
   _makeArrayPoints = () => {

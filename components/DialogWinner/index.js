@@ -13,6 +13,7 @@ import Dialog, {
 import { Audio } from "expo-av";
 
 import Anime from "react-native-anime";
+import strings from "../../constants/Strings";
 
 export default class DialogWinner extends Component {
   componentDidMount() {
@@ -61,6 +62,7 @@ export default class DialogWinner extends Component {
 
   render() {
     const {
+      lg,
       styles,
       visible,
       title,
@@ -88,7 +90,7 @@ export default class DialogWinner extends Component {
           footer={
             <DialogFooter>
               <DialogButton
-                text="Cancelar"
+                text={strings.popup.cancel(lg)}
                 onPress={() => {
                   this.pauseAlarm();
                   onCancelAction();

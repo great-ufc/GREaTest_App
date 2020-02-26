@@ -15,6 +15,7 @@ import Anime from "react-native-anime";
 // import DiceImage from "./DiceImage";
 
 import { View, Image, Easing } from "react-native";
+import strings from "../../constants/Strings";
 
 export default class DialogDado extends Component {
   constructor(props) {
@@ -105,7 +106,7 @@ export default class DialogDado extends Component {
   };
 
   render() {
-    const { styles, visible, title, onCancelAction } = this.props;
+    const { lg, styles, visible, title, onCancelAction } = this.props;
     return (
       <View
         style={[
@@ -137,14 +138,14 @@ export default class DialogDado extends Component {
           footer={
             <DialogFooter>
               <DialogButton
-                text="Fechar"
+                text={strings.popup.close(lg)}
                 onPress={() => {
                   this.pauseAlarm();
                   onCancelAction();
                 }}
               />
               <DialogButton
-                text="JOGAR"
+                text={strings.popup.play(lg)}
                 onPress={() => {
                   this.playAlarm().then(() => {
                     this.playDice();

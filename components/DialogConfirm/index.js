@@ -9,10 +9,11 @@ import Dialog, {
   DialogFooter,
   DialogButton
 } from "react-native-popup-dialog";
+import strings from "../../constants/Strings";
 
 export default class DialogConfirm extends Component {
   render() {
-    const { styles, visible, content, onCancelAction, onOkAction } = this.props;
+    const {lg, styles, visible, content, onCancelAction, onOkAction } = this.props;
 
     return (
       <View
@@ -32,7 +33,7 @@ export default class DialogConfirm extends Component {
           dialogTitle={<DialogTitle title={""} />}
           footer={
             <DialogFooter>
-              <DialogButton text="Cancelar" onPress={onCancelAction} />
+              <DialogButton text={strings.popup.cancel(lg)} onPress={onCancelAction} />
               <DialogButton text="OK" onPress={onOkAction} />
             </DialogFooter>
           }

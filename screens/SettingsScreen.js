@@ -121,6 +121,7 @@ export default class SettingsScreen extends React.Component {
         </View>
 
         <DialogEncerrar
+          lg={this.state.lg}
           title={""}
           styles={styles}
           visible={this.state.visibleEncerrar}
@@ -134,7 +135,8 @@ export default class SettingsScreen extends React.Component {
         />
 
         <DialogConfirm
-          content={"Começar a Partida?"}
+          lg={this.state.lg}
+          content={strings.popup.startMatch(lg)}
           styles={styles}
           visible={this.state.visibleConfirm}
           onCancelAction={() => {
@@ -165,7 +167,7 @@ export default class SettingsScreen extends React.Component {
 
       let k = s == 0 ? 1 : this.state.jogadores[s - 1].chave + 1;
 
-      let cont = "Jogador " + k;
+      let cont = strings.settings.playerTitle(this.state.lg) + k;
 
       let novo_jogador = {
         chave: k,
@@ -179,7 +181,7 @@ export default class SettingsScreen extends React.Component {
       });
     } else {
       ToastAndroid.showWithGravity(
-        "O máximo de jogadores por partida é 7 ",
+        strings.warms.maxPlayers(this.state.lg),
         ToastAndroid.SHORT,
         ToastAndroid.CENTER
       );
@@ -219,10 +221,6 @@ export default class SettingsScreen extends React.Component {
     );
   };
 
-  _rowContent() {
-    return "Jogador";
-  }
-
   _handleRemoveButton(chave) {
     if (this.state.jogadores.length > 2) {
       let result = this.state.jogadores.filter(
@@ -234,7 +232,7 @@ export default class SettingsScreen extends React.Component {
       });
     } else {
       ToastAndroid.showWithGravity(
-        "Precisamos de pelo menos dois jogadores...",
+        strings.warms.noEnoughtPlayers(this.state.lg),
         ToastAndroid.SHORT,
         ToastAndroid.CENTER - 10
       );

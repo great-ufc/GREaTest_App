@@ -10,13 +10,14 @@ import Dialog, {
   DialogFooter,
   DialogButton
 } from "react-native-popup-dialog";
+import strings from "../../constants/Strings";
 
 export default class DialogTimer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      textoBotaoTimer: "Iniciar",
+      textoBotaoTimer: strings.popup.start(props.lg),
       timer: 20,
       uridavez: 0,
       uriImage: [
@@ -51,16 +52,16 @@ export default class DialogTimer extends Component {
 
   onStartTimer = () => {
     // verifica se ele esta em pausa
-    if (this.state.textoBotaoTimer === "Pausar") {
+    if (this.state.textoBotaoTimer === strings.popup.pause(this.props.lg)) {
       clearInterval(this.interval);
-      this.setState({ textoBotaoTimer: "Iniciar" });
+      this.setState({ textoBotaoTimer: strings.popup.start(this.props.lg) });
     } else {
       // para evitar bug de acelerar o timer
       if (this.state.timer === 20) {
         this.setState({ timer: 19 });
       }
       // o texto do botao muda para pausar e o timer eh setado novamente
-      this.setState({ textoBotaoTimer: "Pausar" });
+      this.setState({ textoBotaoTimer: strings.popup.pause(this.props.lg) });
       this.interval = setInterval(
         () =>
           this.setState(prevState => ({
@@ -103,7 +104,7 @@ export default class DialogTimer extends Component {
   };
 
   render() {
-    const { styles, visible, onCancelAction } = this.props;
+    const { lg, styles, visible, onCancelAction } = this.props;
 
     return (
       <Dialog
@@ -117,12 +118,15 @@ export default class DialogTimer extends Component {
         footer={
           <DialogFooter>
             <DialogButton
-              text="Fechar"
+              text={strings.popup.close(lg)}
               onPress={() => {
                 onCancelAction();
                 this.pauseAlarm();
                 clearInterval(this.interval);
-                this.setState({ timer: 20, textoBotaoTimer: "Iniciar" });
+                this.setState({
+                  timer: 20,
+                  textoBotaoTimer: strings.popup.start(lg)
+                });
               }}
             />
 
