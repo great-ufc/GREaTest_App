@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
-    "expo": "^33.0.0",
+    "expo": "^46.0.14",
     "expo-asset": "^7.0.0",
     "expo-cli": "^3.9.1",
     "expo-font": "~5.0.1",
